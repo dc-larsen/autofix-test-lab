@@ -19,16 +19,16 @@ jobs:
         run: npm install -g @socketsecurity/cli
 
       - name: Configure Socket CLI
-        env:
-          SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
         run: |
+          socket config set apiToken "$SOCKET_API_KEY"
           socket config set org david-s-github
           socket config set defaultOrg david-s-github
           socket config list
+        env:
+          SOCKET_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
 
       - name: Run socket fix
         env:
-          SOCKET_SECURITY_API_KEY: ${{ secrets.SOCKET_SECURITY_API_KEY }}
           SOCKET_CLI_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CI: true
         run: |
